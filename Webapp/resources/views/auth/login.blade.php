@@ -77,11 +77,6 @@
       <div>
         <div class="flex justify-between items-center mb-1">
           <label for="password" class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Password</label>
-          @if (Route::has('password.request'))
-            <a href="{{ route('password.request') }}" class="text-xs cn-text-blue font-semibold hover:underline">
-              Forgot?
-            </a>
-          @endif
         </div>
         <input type="password" id="password" name="password" required
                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent transition"
@@ -102,12 +97,11 @@
       </button>
     </form>
 
-    <!-- Footer link -->
-    <div class="px-8 pb-8 text-center bg-gray-50 border-t border-gray-100 pt-4">
-      <p class="text-sm text-gray-600">New to Coinnect?</p>
-      <a href="{{ route('register') }}" class="cn-text-blue font-bold text-sm hover:underline mt-1 inline-block">
-        Create a Coinnect Account
-      </a>
+    <!-- Footer note -->
+    <div class="px-8 pb-6 text-center bg-gray-50 border-t border-gray-100 pt-4">
+      <p class="text-sm text-gray-600">No account yet, or forgot your password?</p>
+      <p class="text-sm font-bold cn-text-blue mt-1">Ask the front desk. Accounts are created by staff.</p>
+      <a href="{{ route('promos') }}" class="inline-block mt-3 text-xs font-semibold cn-text-blue hover:underline">See today's promos &rarr;</a>
     </div>
   </div>
 

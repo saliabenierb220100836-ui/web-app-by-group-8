@@ -11,29 +11,28 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
     public function create(): View
     {
         return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
+        $user = $request->user();
+        $user->forceFill(['last_login_at' => now()])->saveQuietly();
+
+        // Admins always land in the admin panel; "intended" must never send a member there or vice-versa.
+        if ($user->isAdmin()) {
+            return redirect()->route('admin.dashboard');
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();

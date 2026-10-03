@@ -1,7 +1,11 @@
 <?php
 
-it('returns a successful response', function () {
-    $response = $this->get('/');
+test('the home page sends visitors to the login screen', function () {
+    $this->get('/')->assertRedirect('/login');
+});
 
-    $response->assertStatus(200);
+test('the promo page is public', function () {
+    $this->seed();
+
+    $this->get('/promos')->assertOk()->assertSee('Night Owl Promo')->assertSee('Student Promo');
 });
